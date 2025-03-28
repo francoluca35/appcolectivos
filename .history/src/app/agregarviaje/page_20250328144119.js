@@ -1,7 +1,7 @@
 "use client";
 import React, { Suspense } from "react";
 import BackArrow from "../components/backArrow";
-import AgregarViajeForm from "./AgregarViajeForm";
+import AgregarViajeForm from "../components/AgregarViajeForm"; // ruta según ubicación
 
 export default function AgregarViaje() {
   return (
