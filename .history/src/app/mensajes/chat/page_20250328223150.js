@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense } from 'react';
-import ChatRespuesta from '@/app/components/ChatRespuesta';
+import ChatRespuesta from '@/components/ChatRespuesta';
 
 export default function ChatPage() {
   return (
