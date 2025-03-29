@@ -28,7 +28,7 @@ export default function ChatRespuesta() {
       cuerpo: respuesta,
     });
 
-
+    // Marcar como respondido
     await fetch(`/api/marcarRespondido?id=${mensaje._id}`, { method: 'PATCH' });
   };
 
