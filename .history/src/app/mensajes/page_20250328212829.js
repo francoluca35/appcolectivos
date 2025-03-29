@@ -7,22 +7,8 @@ export default function MensajesRecibidos() {
   const { mensajes, loading, error } = useVerMensajes();
   const router = useRouter();
 
-  // Calcular fecha de hace 7 días
-  const haceUnaSemana = new Date();
-  haceUnaSemana.setDate(haceUnaSemana.getDate() - 7);
-
-  // Filtrar por fecha y responder estado
-  const mensajesSemana = mensajes.filter(m =>
-    new Date(m.fecha) >= haceUnaSemana
-  );
-
-  const noLeidos = mensajesSemana
-    .filter(m => !m.respondido)
-    .slice(0, 20);
-
-  const respondidos = mensajesSemana
-    .filter(m => m.respondido)
-    .slice(0, 20);
+  const noLeidos = mensajes.filter(m => !m.respondido);
+  const respondidos = mensajes.filter(m => m.respondido);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-900 via-white to-blue-900 p-6">
@@ -37,7 +23,7 @@ export default function MensajesRecibidos() {
             {loading && <p className="text-gray-500">Cargando...</p>}
             {error && <p className="text-red-500">Error: {error}</p>}
             {!loading && noLeidos.length === 0 ? (
-              <p className="text-gray-500">No hay mensajes nuevos esta semana.</p>
+              <p className="text-gray-500">No hay mensajes nuevos.</p>
             ) : (
               <ul className="space-y-4">
                 {noLeidos.map((msg) => (
@@ -71,7 +57,7 @@ export default function MensajesRecibidos() {
           <h3 className="text-xl font-semibold text-white mb-2">✅ Respondidos</h3>
           <div className="bg-white rounded shadow p-4">
             {respondidos.length === 0 ? (
-              <p className="text-gray-500">No hay mensajes respondidos esta semana.</p>
+              <p className="text-gray-500">No hay mensajes respondidos aún.</p>
             ) : (
               <ul className="space-y-4">
                 {respondidos.map((msg) => (
