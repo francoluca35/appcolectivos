@@ -51,12 +51,10 @@ const useVerViajes = () => {
   const eliminarViajeSilencioso = async (id) => {
     try {
       await axios.delete(`/api/verviajes?id=${id}`);
-      await axios.post("/api/contadorviajes"); // Incrementar contador histórico
     } catch (err) {
       console.error("Error al eliminar viaje vencido", err);
     }
   };
-  
 
   useEffect(() => {
     fetchViajes();
