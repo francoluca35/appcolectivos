@@ -5,13 +5,22 @@ import { useRouter } from "next/navigation";
 import EstadisticasPanel from "../components/EstadisticasPanel";
 import useStats from "@/hooks/useStats";
 
+
 export default function HomeAdmin() {
   const [fechaHora, setFechaHora] = useState(new Date());
-  const [usuario, setUsuario] = useState(null);
+  const [usuario, setUsuario] = useState(null); // Estado para el usuario
   const router = useRouter();
   const { stats, loading } = useStats();
+  
+  const stats = {
+    cantidadViajes: 42,
+    cantidadPasajeros: 315,
+    recaudacionMensual: 45600,
+    recaudacionAnual: 512000,
+  };
 
   useEffect(() => {
+    // Acceso a localStorage solo en el cliente
     const storedUser = localStorage.getItem("adminUser");
     if (storedUser) {
       setUsuario(JSON.parse(storedUser));
@@ -33,6 +42,7 @@ export default function HomeAdmin() {
     { texto: "Dashboard", ruta: "/dashboard", icono: "/Assets/dash.png" },
   ];
 
+  // Mientras se carga el usuario
   if (!usuario) return <div className="p-6">Cargando usuario...</div>;
 
   return (
@@ -45,7 +55,7 @@ export default function HomeAdmin() {
         </div>
 
         <div className="flex items-center gap-3">
-          <img src="/avatar.png" alt="Avatar" className="w-10 h-10 rounded-full border" />
+          <img src="/avatar.png" alt="Avatar" className="w-10 h-10 rounded-full border " />
           <div className="text-right">
             <p className="text-sm font-bold text-gray-800">{usuario.username}</p>
             <p className="text-xs text-red-500 uppercase">{usuario.role}</p>
@@ -65,11 +75,7 @@ export default function HomeAdmin() {
 
       {/* Estadísticas */}
       <div className="w-full">
-        {loading ? (
-          <p className="text-center text-gray-500">Cargando estadísticas...</p>
-        ) : (
-          <EstadisticasPanel stats={stats} />
-        )}
+        <EstadisticasPanel stats={stats} />
       </div>
 
       {/* Botones */}
@@ -81,8 +87,8 @@ export default function HomeAdmin() {
               onClick={() => router.push(btn.ruta)}
               className="bg-red-500 rounded-xl w-full h-32 lg:h-20 flex flex-col items-center justify-center shadow-md hover:bg-red-600 transition"
             >
-              <img src={btn.icono} alt={btn.texto} className="w-8 h-8 mb-1 lg:w-6 lg:h-6" />
-              <span className="text-sm font-semibold text-center px-1 leading-tight">
+              <img src={btn.icono} alt={btn.texto} className="w-8 h-8 mb-1 lg:w-6 lg:h-6 " />
+              <span className=" text-sm font-semibold text-center px-1 leading-tight">
                 {btn.texto}
               </span>
             </button>
